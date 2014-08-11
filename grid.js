@@ -14,11 +14,13 @@
 		majorFillStyle: "black",
 
 		square: function(context, x, y, w, h, majorRes, minorRes, thirdRes) {
+      var i;
 			this._predraw(context);
+
 			if(thirdRes) {
 				this._useThird(context);
 				context.beginPath();
-				for(var i = x; i <= x + w; i += thirdRes) {
+				for(i = x; i <= x + w; i += thirdRes) {
 					context.moveTo(i, y);
 					context.lineTo(i, y + h);
 				}
@@ -32,7 +34,7 @@
 			if(minorRes) {
 				context.beginPath();
 				this._useMinor(context);
-				for(var i = x; i <= x + w; i += minorRes) {
+				for(i = x; i <= x + w; i += minorRes) {
 					context.moveTo(i, y);
 					context.lineTo(i, y + h);
 				}
@@ -58,6 +60,7 @@
 		},
 
 		rect: function(context, x, y, w, h, resx, resy) {
+      var i;
 			this._predraw(context);
 
 			context.beginPath();
@@ -75,7 +78,8 @@
 		},
 
 		isometric: function(context, x, y, w, h, res) {
-			this._predraw(context);
+			var i;
+      this._predraw(context);
 
 			context.beginPath();
 			context.rect(x, y, w, h);
@@ -95,7 +99,7 @@
 			var max = Math.sqrt(w*w+h*h),
 				cos30 = Math.cos(Math.PI / 6),
 				sin30 = Math.sin(Math.PI / 6),
-				cos150 = Math.cos(Math.PI * 5 / 6)
+				cos150 = Math.cos(Math.PI * 5 / 6),
 				sin150 = Math.sin(Math.PI * 5 / 6);
 			for(i = x; i <= x + w; i += res * 2) {
 				context.moveTo(i, y);
@@ -117,6 +121,7 @@
 		},
 
 		dimetric: function(context, x, y, w, h, res) {
+      var i;
 			this._predraw(context);
 
 			context.beginPath();
@@ -136,11 +141,11 @@
 			this._useMajor(context);
 
 			var max = Math.sqrt(w*w+h*h),
-				angle26 = Math.atan(.5);
-				angle153 = Math.PI - angle26;
+				angle26 = Math.atan(.5),
+				angle153 = Math.PI - angle26,
 				cos30 = Math.cos(angle26),
 				sin30 = Math.sin(angle26),
-				cos150 = Math.cos(angle153)
+				cos150 = Math.cos(angle153),
 				sin150 = Math.sin(angle153);
 			for(i = x; i <= x + w; i += res * 2) {
 				context.moveTo(i, y);
@@ -222,7 +227,8 @@
 		},
 
 		dots: function(context, x, y, w, h, majorRes, minorRes) {
-			this._predraw(context);
+			var i;
+      this._predraw(context);
 			context.beginPath();
 			context.rect(x, y, w, h);
 			context.clip();
@@ -230,7 +236,7 @@
 			if(minorRes) {
 				context.beginPath();
 				this._useMinor(context);
-				for(var i = x; i <= x + w; i += minorRes) {
+				for(i = x; i <= x + w; i += minorRes) {
 					for(var j = y; j <= y + h; j += minorRes) {
 						context.rect(i - this.minorDotSize * .5, j - this.minorDotSize * .5, this.minorDotSize, this.minorDotSize);
 					}
@@ -240,7 +246,7 @@
 
 			this._useMajor(context);
 			context.beginPath();
-			for(var i = x; i <= x + w; i += majorRes) {
+			for(i = x; i <= x + w; i += majorRes) {
 				for(var j = y; j <= y + h; j += majorRes) {
 					context.rect(i - this.majorDotSize * .5, j - this.majorDotSize * .5, this.majorDotSize, this.majorDotSize);
 				}
@@ -306,10 +312,11 @@
 			context.beginPath();
 			this._useMajor(context);
 
-			var max = Math.sqrt(w*w+h*h),
+			var i,
+        max = Math.sqrt(w*w+h*h),
 				cos60 = Math.cos(Math.PI / 3),
 				sin60 = Math.sin(Math.PI / 3),
-				cos120 = Math.cos(Math.PI * 2 / 3)
+				cos120 = Math.cos(Math.PI * 2 / 3),
 				sin120 = Math.sin(Math.PI * 2 / 3);
 			for(i = x; i <= x + w; i += res) {
 				context.moveTo(i, y);
@@ -423,7 +430,7 @@
 			context.fillStyle = this.majorFillStyle;
 		}
 
-	}
+	};
 
 
 	if (typeof define === "function" && define.amd) {
